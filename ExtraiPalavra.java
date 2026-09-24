@@ -8,25 +8,32 @@ import java.util.Scanner;
 public class ExtraiPalavra {
     private String arquivo;
     private Scanner leitor;
-    private Formatter gravador;
     
     public ExtraiPalavra(){
     }
     
     public ExtraiPalavra(String arquivo) {
-        this.arquivo = "exemplo1.txt";
-    }
-    
-    public void abrirArquivoLeitura(){
+        this.arquivo = arquivo;
         try{
             leitor = new Scanner(new File(arquivo));
-        }catch (FileNotFoundException ex){
-            System.err.print("Ocorreu erro ao abrir o arquivo para leitura");
-        }    }
-    
-    public lerArquivo(){
-        
         }
+        catch (FileNotFoundException ex){
+            System.err.print("Ocorreu erro ao abrir o arquivo para leitura");
+        }
+    }
+    
+    public void lerArquivo(Palavra[] v){
+        for(int i=0; leitor.hasNextLine(); i++){
+            String linha = leitor.nextLine();
+            Scanner l = new Scanner(linha);
+            for(int j=0; l.hasNext(); j++){
+                String s = l.next();
+                Palavra p = new Palavra(s, i, j);
+            }
+        }
+
+        fecharArquivoLeitura();
+    }
      
     public void fecharArquivoLeitura(){
         if(leitor!=null)

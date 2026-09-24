@@ -25,11 +25,10 @@ public class Palavra {
         }
 
         for (int i = 0; i < 16; i++) {
-
-            int valor = palavra.charAt(i); //pegar codigo numerico do caractere
             
-            //traduzir valor numerico para bits:
-            String binario = Integer.toBinaryString(valor);
+            //traduzir char para bits:
+            String binario = Integer.toBinaryString(palavra.charAt(i));
+            // System.out.println(binario);
 
             //completar com zeros até ter 8 bits:
             while (binario.length() < 8) {
