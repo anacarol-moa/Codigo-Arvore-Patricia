@@ -9,11 +9,11 @@ package arvorepatricia;
  * @author anaca
  */
 public class ArvorePatricia {
-      private abstract class No {
+    private abstract class No {
         
     }
 
-     private class NoInterno extends No {
+    private class NoInterno extends No {
         int bit;
         No esquerda;
         No direita;

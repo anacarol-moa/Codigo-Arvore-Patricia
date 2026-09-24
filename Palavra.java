@@ -20,11 +20,7 @@ public class Palavra {
             palavra = palavra + " ";
         }
 
-        if (palavra.length() > 16) {
-            palavra = palavra.substring(0, 16);  // faz com que se tiver mais de 16 caracteres, considera somente os primeiros 16
-        }
-
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 17; i++) {
             
             //traduzir char para bits:
             String binario = Integer.toBinaryString(palavra.charAt(i));
