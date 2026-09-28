@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package arvorepatricia;
 
-/**
- *
- * @author anaca
- */
+
 public class ArvorePatricia {
 
     private class NoInterno extends No {
@@ -32,7 +25,7 @@ public class ArvorePatricia {
 
     private No raiz;
 
-    public Avorepatricia(){
+    public void Avorepatricia(){
         raiz = null;
     }
 
@@ -62,7 +55,7 @@ public class ArvorePatricia {
             NoExterno externo = (NoExterno) raiz;
 
             if (externo.palavra.getBits().equals(palavra.getBits())) { // testa se já tem a palavra
-                externo.palavra.adicionarPosicao(palavra);
+                externo.palavra.adicionarPosicao(palavra);     //ta errado 
                 return;
             }
 

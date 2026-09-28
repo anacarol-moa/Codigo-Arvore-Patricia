@@ -22,7 +22,7 @@ public class Palavra {
 
         for (int i = 0; i < 17; i++) {
             
-            //traduzir char para bits:
+            //traduzir de char para bits:
             String binario = Integer.toBinaryString(palavra.charAt(i));
             // System.out.println(binario);
 
