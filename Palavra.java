@@ -4,11 +4,15 @@ public class Palavra {
    
     private String palavra;
     private String bits;
+    private int linha; // aumentei
+    private int coluna; // aumentei
     private String posicoes;
 
     public Palavra(String palavra, int linha, int coluna) {
         this.palavra = palavra;
         this.bits = "";
+        this.linhas = linha;
+        this.colunas = coluna;
         this.posicoes = "(" + linha + ", " + coluna + ")";
 
         converterParaBits();
@@ -45,6 +49,14 @@ public class Palavra {
 
     public String getPosicoes() {
         return posicoes;
+    }
+
+    public int getLinha(){
+        return linha;
+    }
+
+    public int getColuna(){
+        return coluna;
     }
 
     public void adicionarPosicao(int linha, int coluna) {
