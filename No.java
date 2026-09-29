@@ -4,9 +4,12 @@ public class No {
     private No filho0E;
     private No filho1D;
 
-    public No(){
-        
-    }
+    public No(int difBit, No pai, No filho0E, No filho1D){
+        this.difBit = difBit;
+        this.pai = pai;
+        this.filho0E = filho0E;
+        this.filho1D = filho1D;
+        }
 
     public int getDifBit() {
         return difBit;

@@ -21,8 +21,8 @@ public class ExtraiPalavra {
             System.err.print("Ocorreu erro ao abrir o arquivo para leitura");
         }
     }
-  
-    /*
+    
+   /*
     Separa as palavras por espaço, mas se tiver uma vírgula após uma palavra "exemplo," tudo isso será identificado como palavra
     public void lerArquivo(Palavra[] v){
         for(int i=0; leitor.hasNextLine(); i++){
@@ -70,7 +70,7 @@ public class ExtraiPalavra {
                     // só é palavra se começar por letra
                     if (ehLetra(linha.charAt(inicio))) {
                         String s = linha.substring(inicio, i);
-                        arvore.inserir(new Palavra(s, numLinha, inicio + 1)); // coluna começa em 1
+                        arvore.inserirPalavra(new Palavra(s, numLinha, inicio + 1)); // coluna começa em 1
                     }
                 } else {
                     i++;
