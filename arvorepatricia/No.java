@@ -1,3 +1,5 @@
+package arvorepatricia;
+
 public class No {
     private int difBit;
     private No pai;
@@ -42,6 +44,4 @@ public class No {
     public void setFilho1D(No filho1d) {
         filho1D = filho1d;
     }
-
-    
 }

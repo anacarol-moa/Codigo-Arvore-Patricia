@@ -25,7 +25,7 @@ public class ArvorePatricia {
 
     private No raiz;
 
-    public void Avorepatricia(){
+    public Arvorepatricia(){
         raiz = null;
     }
 
@@ -119,6 +119,29 @@ public class ArvorePatricia {
 
     public void buscarPalavra (String palavra) {
         if (raiz == null) {
+            System.out.println("Palavra não encontrada.");
+        }
+
+        Palavra procurada = new Palavra(palavra,0,0);
+        No atual = raiz;
+
+        while (atual instanceof NoInterno) { // procura nó interno
+            NoInterno interno = (NoInterno) atual;
+            int bit = procurada.getBits().charAt(interno.bit) - '0';
+
+            if (bit == 0) {
+                atual = interno.esquerda;
+            } else {
+                atual = interno.direita;
+            }
+        }
+
+        NoExterno externo = (NoExterno) atual;
+        if (externo.palavra.getBits().equals(procurada.getBits())) {
+            System.out.println("Palavra: " + externo.palavra.getPalavra());
+            System.out.println("Posições: " + externo.palavra.getPosicoes());
+
+        } else {
             System.out.println("Palavra não encontrada.");
         }
     }
