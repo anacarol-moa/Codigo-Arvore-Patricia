@@ -101,27 +101,38 @@ public class ArvorePatricia {
         if (raiz == null) {
             System.out.println("Palavra não encontrada.");
         }
-//        Palavra procurada = new Palavra(palavra,0,0);
-//        No atual = raiz;
-//
-//        while (atual.getFilho0E() != null || atual.getFilho1D() != null) { // procura nó interno
-//            NoInterno interno = (NoInterno) atual;
-//            int bit = procurada.getBits().charAt(interno.bit) - '0';
-//
-//            if (bit == 0) {
-//                atual = interno.esquerda;
-//            } else {
-//                atual = interno.direita;
-//            }
-//        }
-//
-//        NoExterno externo = (NoExterno) atual;
-//        if (externo.palavra.getBits().equals(procurada.getBits())) {
-//            System.out.println("Palavra: " + externo.palavra.getPalavra());
-//            System.out.println("Posições: " + externo.palavra.getPosicoes());
-//
-//        } else {
-//            System.out.println("Palavra não encontrada.");
-//        }
+        Palavra procurada = new Palavra(palavra,0,0);
+        No atual = raiz;
+        while (atual.getFilho0E() != null || atual.getFilho1D() != null) { // procura nó interno
+            if (procurada.getBits().substring(0, atual.getDifBit()).equals(atual.getBitAcumulado())){
+                int bit = procurada.getBits().charAt(atual.getDifBit());
+                if (bit == 48){
+                    if (atual.getFilho0E() != null){
+                        atual = atual.getFilho0E();
+                    }
+                    else{
+                        System.out.println("Palavra não encontrada.");
+                        return;
+                    }
+                }
+                else{
+                    if (atual.getFilho1D() != null){
+                        atual = atual.getFilho1D();
+                    }
+                    else{
+                        System.out.println("Palavra não encontrada.");
+                        return;
+                    }
+                }
+            }
+            else{
+                System.out.println("Palavra não encontrada.");
+                return;
+            }
+        }
+        if (atual.getPalavra().getPalavra().trim().equals(palavra)){
+            System.out.println("Paavra encontrada nas posições: " + atual.getPalavra().getPosicoes());
+        }
+        System.out.println("Palavra não encontrada.");
     }
 }

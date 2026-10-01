@@ -11,6 +11,8 @@ public class Palavra {
     public Palavra(String palavra, int linha, int coluna) {
         this.palavra = palavra;
         this.bits = "";
+        this.linha = linha;
+        this.coluna = coluna;
         this.posicoes = "(" + linha + ", " + coluna + ")";
 
         converterParaBits();
