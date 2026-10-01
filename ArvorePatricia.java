@@ -2,30 +2,9 @@ package arvorepatricia;
 
 
 public class ArvorePatricia {
-
-    private class NoInterno extends No {
-        int bit;
-        No esquerda;
-        No direita;
-
-        public NoInterno(int bit, No esquerda, No direita) { // se o bit for 17, nesse ponto vamos olhar o 17ºbit para ver se vai pra esquerda ou direita
-            this.bit = bit;
-            this.esquerda = esquerda;
-            this.direita = direita;
-        }
-    }
-
-    private class NoExterno extends No {
-        Palavra palavra;
-
-        public NoExterno(Palavra palavra) {
-            this.palavra = palavra;
-        }
-    }
-
     private No raiz;
 
-    public void Avorepatricia(){
+    public ArvorePatricia() {
         raiz = null;
     }
 
@@ -44,76 +23,77 @@ public class ArvorePatricia {
     }
 
     public void inserirPalavra (Palavra palavra) {
-
         if (raiz == null) {
-            raiz = new NoExterno(palavra);  // arvore vazia
+            raiz = new No(129, palavra.getBits(), palavra, null, null, null);  // arvore vazia
             return;
         }
 
         No atual = raiz;
+        boolean controle = false;
+        while (atual.getFilho0E() != null || atual.getFilho1D() != null) {
 
-        while (atual instanceof NoInterno) {   
+            int bit = palavra.getBits().charAt(atual.getDifBit());
 
-            NoInterno interno = (NoInterno) atual;
-            
-            int bit = palavra.getBits().charAt(interno.bit) - '0';
-            
-            if (bit == 0) {
-                atual = interno.esquerda;
-            } else {
-                atual = interno.direita;
+            if (palavra.getBits().substring(0, atual.getDifBit()).equals(atual.getBitAcumulado())){ //verifica se não precisa criar nos no meio do caminho
+                if (bit == 48) { //0 em ascii
+                    if (atual.getFilho0E() != null){
+                        atual = atual.getFilho0E();
+                    }
+                    else{
+                        No n = new No(129, palavra.getBits(), palavra, atual, null, null);
+                        atual.setFilho0E(n);
+                        return;
+                    }
+                } else {
+                    if (atual.getFilho1D() != null){
+                        atual = atual.getFilho1D();
+                    }
+                    else{
+                        No n = new No(129, palavra.getBits(), palavra, atual, null, null);
+                        atual.setFilho1D(n);
+                        return;
+                    }
+                }
             }
-        }
-        NoExterno externo = (NoExterno) atual;
-
-        if (externo.palavra.getBits().equals(palavra.getBits())) { // se já existe essa palavra
-            externo.palavra.adicionarPosicao(palavra.getLinha(), palavra.getColuna()); // aumenta a posição
-            return;
-        }
-
-        int novoBit = primeiroBitDiferente(externo.palavra, palavra); // procurando diferença
-
-        No pai = null;
-        atual = raiz;
-
-        while (atual instanceof NoInterno) {
-
-            NoInterno interno = (NoInterno) atual;
-            if (interno.bit >= novoBit) { // onde inserir
+            else{
+                controle = true; //dedine algumas pequenas alteraçoes na hora de inserir
                 break;
             }
-
-            pai = atual;
-            int bit = palavra.getBits().charAt(interno.bit) - '0';
-
-            if (bit == 0) {
-                atual = interno.esquerda;
-            } else {
-                atual = interno.direita;
-            }
         }
 
-        NoExterno novoExterno = new NoExterno(palavra);
-        NoInterno novoInterno;
-        int bitPalavra = palavra.getBits().charAt(novoBit) - '0';
-
-        if (bitPalavra == 0) {
-            novoInterno = new NoInterno(novoBit, novoExterno, atual);
-        } else {novoInterno = new NoInterno(novoBit, atual, novoExterno);
+        int diffbit;
+        if (controle){
+            Palavra p = new Palavra(atual.getBitAcumulado()); //so pra achar o primeiro bit diferente
+            diffbit = primeiroBitDiferente(p, palavra);
+        }
+        else{
+            if (atual.getPalavra().getBits().equals(palavra.getBits())) { // se já existe essa palavra
+                atual.getPalavra().adicionarPosicao(palavra.getLinha(), palavra.getColuna()); // aumenta a posição
+                return;
+            }
+            diffbit = primeiroBitDiferente(palavra, atual.getPalavra());
         }
 
-        if (pai == null) {
-            raiz = novoInterno;
-        } else {
-            NoInterno internoPai = (NoInterno) pai;
-
-            int bitPai = palavra.getBits().charAt(internoPai.bit) - '0';
-
-            if (bitPai == 0) {
-                internoPai.esquerda = novoInterno;
-            } else {
-                internoPai.direita = novoInterno;
-            }
+        No r = new No(diffbit, palavra.getBits().substring(0, diffbit), null, atual.getPai(), null, null);
+        No n = new No(129, palavra.getBits(), palavra, r, null, null);
+        int bit = palavra.getBits().charAt(diffbit);
+        if (atual == raiz){
+            raiz = r;
+        }
+        else if (atual.getPai().getFilho0E() == atual){
+            atual.getPai().setFilho0E(r);
+        }
+        else{
+            atual.getPai().setFilho1D(r);
+        }
+        atual.setPai(r);
+        if (bit == 48){
+            r.setFilho0E(n);
+            r.setFilho1D(atual);
+        }
+        else{
+            r.setFilho1D(n);
+            r.setFilho0E(atual);
         }
     }
 
@@ -121,5 +101,27 @@ public class ArvorePatricia {
         if (raiz == null) {
             System.out.println("Palavra não encontrada.");
         }
+//        Palavra procurada = new Palavra(palavra,0,0);
+//        No atual = raiz;
+//
+//        while (atual.getFilho0E() != null || atual.getFilho1D() != null) { // procura nó interno
+//            NoInterno interno = (NoInterno) atual;
+//            int bit = procurada.getBits().charAt(interno.bit) - '0';
+//
+//            if (bit == 0) {
+//                atual = interno.esquerda;
+//            } else {
+//                atual = interno.direita;
+//            }
+//        }
+//
+//        NoExterno externo = (NoExterno) atual;
+//        if (externo.palavra.getBits().equals(procurada.getBits())) {
+//            System.out.println("Palavra: " + externo.palavra.getPalavra());
+//            System.out.println("Posições: " + externo.palavra.getPosicoes());
+//
+//        } else {
+//            System.out.println("Palavra não encontrada.");
+//        }
     }
 }

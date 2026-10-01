@@ -1,11 +1,17 @@
+package arvorepatricia;
+
 public class No {
-    private int difBit;
+    private int difBit; //talvez seja redundante essa variavel, pode ser usada bitAcumulado.length()
+    private String bitAcumulado;
+    private Palavra palavra;
     private No pai;
     private No filho0E;
     private No filho1D;
 
-    public No(int difBit, No pai, No filho0E, No filho1D){
+    public No(int difBit, String bitAcumulado, Palavra palavra, No pai, No filho0E, No filho1D){
         this.difBit = difBit;
+        this.bitAcumulado = bitAcumulado;
+        this.palavra = palavra;
         this.pai = pai;
         this.filho0E = filho0E;
         this.filho1D = filho1D;
@@ -43,5 +49,19 @@ public class No {
         filho1D = filho1d;
     }
 
-    
+    public Palavra getPalavra() {
+        return palavra;
+    }
+
+    public void setPalavra(Palavra palavra) {
+        this.palavra = palavra;
+    }
+
+    public String getBitAcumulado() {
+        return bitAcumulado;
+    }
+
+    public void setBitAcumulado(String bitAcumulado) {
+        this.bitAcumulado = bitAcumulado;
+    }
 }

@@ -11,11 +11,13 @@ public class Palavra {
     public Palavra(String palavra, int linha, int coluna) {
         this.palavra = palavra;
         this.bits = "";
-        this.linhas = linha;
-        this.colunas = coluna;
         this.posicoes = "(" + linha + ", " + coluna + ")";
 
         converterParaBits();
+    }
+
+    public Palavra (String bits){
+        this.bits = bits;
     }
 
     private void converterParaBits() {
@@ -24,7 +26,7 @@ public class Palavra {
             palavra = palavra + " ";
         }
 
-        for (int i = 0; i < 17; i++) {
+        for (int i = 0; i < 16; i++) {
             
             //traduzir de char para bits:
             String binario = Integer.toBinaryString(palavra.charAt(i));
