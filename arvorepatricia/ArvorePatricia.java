@@ -131,7 +131,8 @@ public class ArvorePatricia {
             }
         }
         if (atual.getPalavra().getPalavra().trim().equals(palavra)){
-            System.out.println("Paavra encontrada nas posições: " + atual.getPalavra().getPosicoes());
+            System.out.println("Palavra encontrada nas posições: " + atual.getPalavra().getPosicoes());
+            return;
         }
         System.out.println("Palavra não encontrada.");
     }
