@@ -18,13 +18,17 @@ public class Palavra {
         converterParaBits();
     }
 
+    public Palavra (String bits){
+        this.bits = bits;
+    }
+
     private void converterParaBits() {
 
         while (palavra.length() < 16) {
             palavra = palavra + " ";
         }
 
-        for (int i = 0; i < 17; i++) {
+        for (int i = 0; i < 16; i++) {
             
             //traduzir de char para bits:
             String binario = Integer.toBinaryString(palavra.charAt(i));

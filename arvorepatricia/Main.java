@@ -6,7 +6,6 @@ public class Main {
         ArvorePatricia arvore = new ArvorePatricia();
         ExtraiPalavra e = new ExtraiPalavra("exemplo1.txt");
         e.lerArquivo(arvore);
-        arvore.buscarPalavra("trabalho");
+        arvore.buscarPalavra("Brasil");
     }
-    
 }
